@@ -1,77 +1,163 @@
 library(grid)
+library(gridExtra)
 
-center_distance <- 0.02
-
-# Text sample size
-n <- 1000
-n_size = 4
-n_fontface = "bold"
-col_left = rgb(0.3, 0.3, 0.3)
-col_right = "#D17A00"
-
-
-# headlines
-
-headline_fontface = "plain"
-headline_1_text_left <- "Treated Patients"
-headline_1_text_right <- headline_1_text_left
-
+#outcomes
+n <- 10000 / 100
+cases_right <- c(600, 200) / 10
+cases_left <- c(600, 400) / 10
+outcome_texts <- c("Really bad headache", "Headache. Not so bad. But still...")
+headline_1_text_left <- "Patients Treated with"
 headline_2_text_left <- "Boring Mushrooms"
 headline_2_text_right <- "Exciting Mushrooms"
 
-headline_size = 1.5
 
-########box_settings#######
-height_first <- 0.53
-distance_box <- 0.1
+infobar(n, cases_right, cases_left, outcome_texts, headline_1_text_left, headline_2_text_left,
+        headline_2_text_right, outcome_fontface = "plain")
 
-# outcomes
-outcome_text <- "Really bad headache"
-outcome_col <- rgb(0.3, 0.3, 0.3)
-outcome_size <- 1.5
-outcome_fontface <- "bold"
+infobar <- function(n, cases_right, cases_left, outcome_texts, headline_1_text_left,
+                    headline_2_text_left, headline_2_text_right,
+  #general settings
+  center_distance = 0.01,
+  fontsize = 1,
+  description_size = 0.6,
+  bar_size = 0.4,
 
+  # Text sample size
+  n_size = 3.5 * fontsize,
+  n_fontface = "bold",
+  col_left = rgb(0.3, 0.3, 0.3),
+  col_right = "#D17A00",
 
-# the text
-n_left <- textGrob(n, x = 0.5 - center_distance, y = 0.8, just="right", gp = gpar(cex=n_size, col = col_left,
-                                                                  fontface = n_fontface))
-n_right <- textGrob(n, 0.5 + center_distance, y = 0.8, just="left", gp = gpar(cex=n_size, col = col_right,
-                                                               fontface =n_fontface))
-headline1_left <- textGrob(headline_1_text_left, 0.5 - center_distance, y = 0.7, just="right",
-                      gp = gpar(cex=headline_size, col = col_left, fontface = headline_fontface))
-headline1_right <- textGrob(headline_1_text_right, 0.5 + center_distance, y = 0.7, just="left",
-                           gp = gpar(cex=headline_size, col = col_right, fontface = headline_fontface))
+  ###### headlines ######
+  headline1_fontface = "plain",
+  headline2_fontface = "bold",
+  #positioning of the headlines
+  n_height = 0.7,
+  headline1_height = 0.37,
+  headline2_height = 0.2,
+  headline_1_text_right = headline_1_text_left,
 
-headline2_left <- textGrob(headline_2_text_left, 0.5 - center_distance, y = 0.7 -  headline_size/25, just="right",
-                           gp = gpar(cex=headline_size, col = col_left, fontface = headline_fontface))
-headline2_right <- textGrob(headline_2_text_right, 0.5 + center_distance, y = 0.7 - headline_size/25, just="left",
-                            gp = gpar(cex=headline_size, col = col_right, fontface = headline_fontface))
+  headline_size = 1.5 * fontsize,
 
-infotext <- gTree(children = gList(n_left, n_right, headline1_left, headline1_right,
-                                   headline2_left, headline2_right))
+  ########box_settings#######
+  #height of the first bix element
+  height_first = 0.9,
+  #distance from box headline to box
+  distance_box = 0.4,
+  box_height = 0.4,
 
-# now starting with the individual outcomes
-outcome <- textGrob(outcome_text, 0.5, y = height_first, just="center",
-                    gp = gpar(cex=headline_size, col = outcome_col, fontface = outcome_fontface))
+  #cases values
+  case_distance = 0.01,
+  case_size = 1.8 * fontsize,
 
+  # outcomes
+  outcome_col = rgb(0.3, 0.3, 0.3),
+  outcome_size = 1.5 * fontsize,
+  outcome_fontface = "bold",
+  outcome_cases_fontface = "bold"
+){
 
-# the bars
-grid.draw(rectGrob(gp=gpar(lty=0)))
-box_left <- rectGrob(x=0.5 - center_distance, y = height_first - distance_box,
-                     height = 0.1, width=0.45, just="right",
-                     gp=gpar(col=col_left))
-box_right <- rectGrob(x=0.5 + center_distance, y = height_first - distance_box,
-                      height = 0.1, width=0.45, just="left",
-                      gp = gpar(col=col_right))
-
-boxes <- gTree(children = gList(outcome, box_left, box_right))
-
-grid.draw(boxes)
-grid.draw(infotext)
-
-sample_vp <- viewport(x = 0, y = 0,
-                      width = 1, height = 1,
-                      just = c("left", "bottom"))
-pushViewport(sample_vp)
+  #creating the grobs
 
 
+  # the text
+  n_left <- textGrob(n, x = 0.5 - center_distance, y = n_height, just="right", gp = gpar(cex=n_size, col = col_left,
+                                                                    fontface = n_fontface))
+  n_right <- textGrob(n, 0.5 + center_distance, y = n_height, just="left", gp = gpar(cex=n_size, col = col_right,
+                                                                 fontface =n_fontface))
+  headline1_left <- textGrob(headline_1_text_left, 0.5 - center_distance, y = headline1_height, just="right",
+                        gp = gpar(cex=headline_size, col = col_left, fontface = headline1_fontface))
+  headline1_right <- textGrob(headline_1_text_right, 0.5 + center_distance, y = headline1_height, just="left",
+                             gp = gpar(cex=headline_size, col = col_right, fontface = headline1_fontface))
+
+  headline2_left <- textGrob(headline_2_text_left, 0.5 - center_distance, y = headline2_height, just="right",
+                             gp = gpar(cex=headline_size, col = col_left, fontface = headline2_fontface))
+  headline2_right <- textGrob(headline_2_text_right, 0.5 + center_distance, y = headline2_height, just="left",
+                              gp = gpar(cex=headline_size, col = col_right, fontface = headline2_fontface))
+
+  infotext <- gTree(children = gList(n_left, n_right, headline1_left, headline1_right,
+                                     headline2_left, headline2_right))
+
+  grobs <- list(infotext)
+
+  for(i in 1:length(cases_left)){
+      case_right <- cases_right[i]
+      case_left <- cases_left[i]
+      outcome_text <- outcome_texts[i]
+
+
+    # now starting with the individual outcomes
+    #outcome name
+    outcome <- textGrob(outcome_text, 0.5, y = height_first, just="center",
+                        gp = gpar(cex=headline_size, col = outcome_col, fontface = outcome_fontface))
+
+
+    # the bars
+    box_left <- rectGrob(x=0.5 - center_distance, y = height_first - distance_box,
+                         height = box_height, width=0.45, just="right",
+                         gp=gpar(col=col_left))
+    box_right <- rectGrob(x=0.5 + center_distance, y = height_first - distance_box,
+                          height = box_height, width=0.45, just="left",
+                          gp = gpar(col=col_right))
+
+
+    #width calculation
+    w_left <- 0.45 / n * case_left
+    w_right <- 0.45 / n * case_right
+
+
+    #bar filling
+    filling_left <- rectGrob(x=0.5 - center_distance, y = height_first - distance_box,
+                         height = box_height, width=w_left, just="right",
+                         gp=gpar(col=col_left, fill=col_left))
+    filling_right <- rectGrob(x=0.5 + center_distance, y = height_first - distance_box,
+                          height = box_height, width=w_right, just="left",
+                          gp = gpar(col=col_right, fill = col_right))
+
+    #bar text
+    if(case_left/n < 0.5){
+      value_left <- textGrob(case_left, x= 0.5 - center_distance - w_left - case_distance,
+                             y = height_first - distance_box, just="right",
+                             gp = gpar(cex=case_size, col = col_left, fontface = outcome_cases_fontface))
+    } else {
+      value_left <- textGrob(case_left, x= 0.5 - center_distance - w_left + case_distance,
+                             y = height_first - distance_box, just="left",
+                             gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface))
+    }
+
+    if(case_right/n < 0.5){
+      value_right <- textGrob(case_right, x= 0.5 + center_distance + w_right + case_distance,
+                             y = height_first - distance_box, just="left",
+                             gp = gpar(cex=case_size, col = col_right, fontface = outcome_cases_fontface))
+    } else {
+      value_right <- textGrob(case_right, x= 0.5 + center_distance + w_right - case_distance,
+                             y = height_first - distance_box, just="right",
+                             gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface))
+    }
+
+    grobs[[i+1]] <- gTree(children = gList(outcome, box_left, box_right, filling_left, filling_right,
+                                    value_left, value_right))
+  }
+
+
+
+  grid.newpage()
+
+
+  # main_vp <- viewport(width=unit(min(1,diff(xlim)/diff(ylim)), "snpc"), # aspect ratio preserved
+  #                height=unit(min(1,diff(ylim)/diff(xlim)), "snpc"),
+  #                xscale=xlim,
+  #                yscale=ylim
+  #                )
+  # pushViewport(main_vp)
+
+  heights <- c(2, 1)
+
+  #grobs[[3]] <- boxes
+
+  heights <- rep(bar_size, length(grobs))
+  heights[1] <- description_size
+
+  grid.arrange(grobs=grobs, heights=heights, ncol=1)
+
+}
