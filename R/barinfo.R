@@ -1,5 +1,5 @@
 library(grid)
-library(gridExtra)
+#library(gridExtra)
 
 #outcomes
 n <- 10000 / 100
@@ -11,9 +11,53 @@ headline_2_text_left <- "Boring Mushrooms"
 headline_2_text_right <- "Exciting Mushrooms"
 
 
-infobar(n, cases_right, cases_left, outcome_texts, headline_1_text_left, headline_2_text_left,
-        headline_2_text_right, outcome_fontface = "plain")
+# png(filename="test.png",
+#     width=700,
+#     height=400,
+#     pointsize=12)
+#
+# infobar(n, cases_right, cases_left, outcome_texts, headline_1_text_left, headline_2_text_left,
+#         headline_2_text_right, outcome_fontface = "plain")
+#
+# dev.off()
 
+
+#' Title
+#'
+#' @param n
+#' @param cases_right
+#' @param cases_left
+#' @param outcome_texts
+#' @param headline_1_text_left
+#' @param headline_2_text_left
+#' @param headline_2_text_right
+#' @param center_distance
+#' @param fontsize
+#' @param description_size
+#' @param bar_size
+#' @param n_size
+#' @param n_fontface
+#' @param col_left
+#' @param col_right
+#' @param headline2_fontface
+#' @param n_height
+#' @param headline1_height
+#' @param headline2_height
+#' @param headline_1_text_right
+#' @param headline_size
+#' @param distance_box
+#' @param box_height
+#' @param case_distance
+#' @param case_size
+#' @param outcome_col
+#' @param outcome_size
+#' @param outcome_fontface
+#' @param outcome_cases_fontface
+#'
+#' @return
+#' @export
+#'
+#' @examples
 infobar <- function(n, cases_right, cases_left, outcome_texts, headline_1_text_left,
                     headline_2_text_left, headline_2_text_right,
   #general settings
@@ -25,7 +69,7 @@ infobar <- function(n, cases_right, cases_left, outcome_texts, headline_1_text_l
   # Text sample size
   n_size = 3.5 * fontsize,
   n_fontface = "bold",
-  col_left = rgb(0.3, 0.3, 0.3),
+  col_left = rgb(0.4, 0.4, 0.4),
   col_right = "#D17A00",
 
   ###### headlines ######
@@ -144,16 +188,7 @@ infobar <- function(n, cases_right, cases_left, outcome_texts, headline_1_text_l
   grid.newpage()
 
 
-  # main_vp <- viewport(width=unit(min(1,diff(xlim)/diff(ylim)), "snpc"), # aspect ratio preserved
-  #                height=unit(min(1,diff(ylim)/diff(xlim)), "snpc"),
-  #                xscale=xlim,
-  #                yscale=ylim
-  #                )
-  # pushViewport(main_vp)
-
   heights <- c(2, 1)
-
-  #grobs[[3]] <- boxes
 
   heights <- rep(bar_size, length(grobs))
   heights[1] <- description_size
