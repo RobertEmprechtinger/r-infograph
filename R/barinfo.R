@@ -1,15 +1,23 @@
 library(grid)
-#library(gridExtra)
+library(gridExtra)
 
 #outcomes
-n <- 10000 / 100
-cases_right <- c(600, 200) / 10
-cases_left <- c(600, 400) / 10
+n <- 10000
+cases_right <- c(600, 200)
+cases_left <- c(600, 400)
 outcome_texts <- c("Really bad headache", "Headache. Not so bad. But still...")
-headline_1_text_left <- "Patients Treated with"
-headline_2_text_left <- "Boring Mushrooms"
-headline_2_text_right <- "Exciting Mushrooms"
+headline_main_text_left <- "Placebo"
+headline_main_text_right <- "Einhornstaub"
+headline_1_text_left <- "erhielten"
+headline_2_text_left <- "Personen"
+headline_2_text_right <- headline_2_text_left
 
+
+infobar(headline_main_text_left, headline_main_text_right,
+        headline_1_text_left, headline_2_text_left,
+        headline_2_text_right, n, outcome_texts, cases_right, cases_left,
+        outcome_fontface = "plain", big.mark = "."
+        )
 
 # png(filename="test.png",
 #     width=700,
@@ -24,7 +32,7 @@ headline_2_text_right <- "Exciting Mushrooms"
 
 #' Title
 #'
-#' @param n
+#' @param n the length of the empty bars
 #' @param cases_right
 #' @param cases_left
 #' @param outcome_texts
@@ -53,13 +61,17 @@ headline_2_text_right <- "Exciting Mushrooms"
 #' @param outcome_size
 #' @param outcome_fontface
 #' @param outcome_cases_fontface
+#' @param headline_main_text_left
+#' @param headline_main_text_right
 #'
 #' @return
 #' @export
 #'
 #' @examples
-infobar <- function(n, cases_right, cases_left, outcome_texts, headline_1_text_left,
-                    headline_2_text_left, headline_2_text_right,
+infobar <- function(headline_main_text_left, headline_main_text_right,
+                    headline_1_text_left = "received",
+                    headline_2_text_left ="", headline_2_text_right ="",
+                    n, outcome_texts, cases_right, cases_left,
   #general settings
   center_distance = 0.01,
   fontsize = 1,
@@ -98,16 +110,23 @@ infobar <- function(n, cases_right, cases_left, outcome_texts, headline_1_text_l
   outcome_col = rgb(0.3, 0.3, 0.3),
   outcome_size = 1.5 * fontsize,
   outcome_fontface = "bold",
-  outcome_cases_fontface = "bold"
+  outcome_cases_fontface = "bold",
+
+  #number style
+  big.mark = ",",
+  small.mark = "."
 ){
 
   #creating the grobs
 
+  headline_2_text_right <- paste(formatC(n, format="f", big.mark = big.mark, digits=0), headline_2_text_right)
+  headline_2_text_left <- paste(formatC(n, format="f", big.mark = big.mark, digits=0), headline_2_text_left)
+
 
   # the text
-  n_left <- textGrob(n, x = 0.5 - center_distance, y = n_height, just="right", gp = gpar(cex=n_size, col = col_left,
+  n_left <- textGrob(headline_main_text_left, x = 0.5 - center_distance, y = n_height, just="right", gp = gpar(cex=n_size, col = col_left,
                                                                     fontface = n_fontface))
-  n_right <- textGrob(n, 0.5 + center_distance, y = n_height, just="left", gp = gpar(cex=n_size, col = col_right,
+  n_right <- textGrob(headline_main_text_right, 0.5 + center_distance, y = n_height, just="left", gp = gpar(cex=n_size, col = col_right,
                                                                  fontface =n_fontface))
   headline1_left <- textGrob(headline_1_text_left, 0.5 - center_distance, y = headline1_height, just="right",
                         gp = gpar(cex=headline_size, col = col_left, fontface = headline1_fontface))
