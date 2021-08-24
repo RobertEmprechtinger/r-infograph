@@ -3,9 +3,9 @@ library(gridExtra)
 
 #outcomes
 n <- 10000
-cases_right <- c(600, 200)
-cases_left <- c(600, 400)
-outcome_texts <- c("Really bad headache", "Headache. Not so bad. But still...")
+cases_right <- c(600, 200, 100, 100)
+cases_left <- c(600, 400, 100, 100)
+outcome_texts <- c("Really bad headache", "Headache. Not so bad. But still...", "test 3", "test4")
 headline_main_text_left <- "Placebo"
 headline_main_text_right <- "Einhornstaub"
 headline_1_text_left <- "erhielten"
@@ -16,8 +16,9 @@ headline_2_text_right <- headline_2_text_left
 infobar(headline_main_text_left, headline_main_text_right,
         headline_1_text_left, headline_2_text_left,
         headline_2_text_right, n, outcome_texts, cases_right, cases_left,
-        outcome_fontface = "plain", big.mark = "."
-        )
+        outcome_fontface = "plain", big.mark = ".", plot_width = 22,
+        bar_size = 2.5, description_size = 4
+)
 
 # png(filename="test.png",
 #     width=700,
@@ -75,8 +76,8 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
   #general settings
   center_distance = 0.01,
   fontsize = 1,
-  description_size = 0.6,
-  bar_size = 0.4,
+  description_size = 6,
+  bar_size = 6,
 
   # Text sample size
   n_size = 3.5 * fontsize,
@@ -96,8 +97,8 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
   headline_size = 1.5 * fontsize,
 
   ########box_settings#######
-  #height of the first bix element
-  height_first = 0.9,
+  #height of the first box element
+  height_first = 0.8,
   #distance from box headline to box
   distance_box = 0.4,
   box_height = 0.4,
@@ -114,7 +115,9 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
 
   #number style
   big.mark = ",",
-  small.mark = "."
+  small.mark = ".",
+
+  plot_width = 16
 ){
 
   #creating the grobs
@@ -207,11 +210,12 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
   grid.newpage()
 
 
-  heights <- c(2, 1)
+  heights <- rep(unit(bar_size, "cm"), length(grobs))
+  heights[1] <- unit(description_size, "cm")
 
-  heights <- rep(bar_size, length(grobs))
-  heights[1] <- description_size
-
-  grid.arrange(grobs=grobs, heights=heights, ncol=1)
+  grid.arrange(grobs=grobs, heights=heights, ncol=1, widths = unit(plot_width, "cm"))
 
 }
+
+
+
