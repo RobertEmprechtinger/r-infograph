@@ -158,25 +158,27 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
                           gp = gpar(col=col_right, fill = col_right))
 
     #bar text
-    if(case_left/n < 0.5){
+    ifelse(case_left/n < 0.5,
+      #condition true
       value_left <- grid::textGrob(case_left, x= 0.5 - center_distance - w_left - case_distance,
                              y = height_first - distance_bar, just="right",
-                             gp = gpar(cex=case_size, col = col_left, fontface = outcome_cases_fontface))
-    } else {
+                             gp = gpar(cex=case_size, col = col_left, fontface = outcome_cases_fontface)),
+      #condition false
       value_left <- grid::textGrob(case_left, x= 0.5 - center_distance - w_left + case_distance,
                              y = height_first - distance_bar, just="left",
-                             gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface))
-    }
+                             gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface)))
 
-    if(case_right/n < 0.5){
+
+    ifelse(case_right/n < 0.5,
+      #condition true
       value_right <- grid::textGrob(case_right, x= 0.5 + center_distance + w_right + case_distance,
                              y = height_first - distance_bar, just="left",
-                             gp = gpar(cex=case_size, col = col_right, fontface = outcome_cases_fontface))
-    } else {
+                             gp = gpar(cex=case_size, col = col_right, fontface = outcome_cases_fontface)),
+      #condition false
       value_right <- grid::textGrob(case_right, x= 0.5 + center_distance + w_right - case_distance,
                              y = height_first - distance_bar, just="right",
-                             gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface))
-    }
+                             gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface)))
+
 
     grobs[[i+1]] <- gTree(children = gList(outcome, box_left, box_right, filling_left, filling_right,
                                     value_left, value_right))
