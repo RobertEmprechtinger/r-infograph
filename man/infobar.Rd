@@ -2,7 +2,7 @@
 % Please edit documentation in R/barinfo.R
 \name{infobar}
 \alias{infobar}
-\title{Title}
+\title{Create infoplot with bars}
 \usage{
 infobar(
   headline_main_text_left,
@@ -116,5 +116,5 @@ infobar(
 
 }
 \description{
-Title
+Create infoplot with bars
 }

@@ -1,5 +1,7 @@
 #' Create infoplot with bars
 #'
+#' @import grid gridExtra
+#'
 #' @param n the length of the empty bars
 #' @param cases_right number of cases right
 #' @param cases_left number of cases left
@@ -102,18 +104,18 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
 
 
   # the text
-  n_left <- textGrob(headline_main_text_left, x = 0.5 - center_distance, y = headline_main_height, just="right", gp = gpar(cex=n_size, col = col_left,
+  n_left <- grid::textGrob(headline_main_text_left, x = 0.5 - center_distance, y = headline_main_height, just="right", gp = gpar(cex=n_size, col = col_left,
                                                                     fontface = headline_main_fontface))
-  n_right <- textGrob(headline_main_text_right, 0.5 + center_distance, y = headline_main_height, just="left", gp = gpar(cex=n_size, col = col_right,
+  n_right <- grid::textGrob(headline_main_text_right, 0.5 + center_distance, y = headline_main_height, just="left", gp = gpar(cex=n_size, col = col_right,
                                                                  fontface =headline_main_fontface))
-  headline1_left <- textGrob(headline_1_text_left, 0.5 - center_distance, y = headline1_height, just="right",
+  headline1_left <- grid::textGrob(headline_1_text_left, 0.5 - center_distance, y = headline1_height, just="right",
                         gp = gpar(cex=headline_size, col = col_left, fontface = headline1_fontface))
-  headline1_right <- textGrob(headline_1_text_right, 0.5 + center_distance, y = headline1_height, just="left",
+  headline1_right <- grid::textGrob(headline_1_text_right, 0.5 + center_distance, y = headline1_height, just="left",
                              gp = gpar(cex=headline_size, col = col_right, fontface = headline1_fontface))
 
-  headline2_left <- textGrob(headline_2_text_left, 0.5 - center_distance, y = headline2_height, just="right",
+  headline2_left <- grid::textGrob(headline_2_text_left, 0.5 - center_distance, y = headline2_height, just="right",
                              gp = gpar(cex=headline_size, col = col_left, fontface = headline2_fontface))
-  headline2_right <- textGrob(headline_2_text_right, 0.5 + center_distance, y = headline2_height, just="left",
+  headline2_right <- grid::textGrob(headline_2_text_right, 0.5 + center_distance, y = headline2_height, just="left",
                               gp = gpar(cex=headline_size, col = col_right, fontface = headline2_fontface))
 
   infotext <- gTree(children = gList(n_left, n_right, headline1_left, headline1_right,
@@ -129,7 +131,7 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
 
     # now starting with the individual outcomes
     #outcome name
-    outcome <- textGrob(outcome_text, 0.5, y = height_first, just="center",
+    outcome <- grid::textGrob(outcome_text, 0.5, y = height_first, just="center",
                         gp = gpar(cex=outcome_size, col = outcome_col, fontface = outcome_fontface))
 
 
@@ -157,21 +159,21 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
 
     #bar text
     if(case_left/n < 0.5){
-      value_left <- textGrob(case_left, x= 0.5 - center_distance - w_left - case_distance,
+      value_left <- grid::textGrob(case_left, x= 0.5 - center_distance - w_left - case_distance,
                              y = height_first - distance_bar, just="right",
                              gp = gpar(cex=case_size, col = col_left, fontface = outcome_cases_fontface))
     } else {
-      value_left <- textGrob(case_left, x= 0.5 - center_distance - w_left + case_distance,
+      value_left <- grid::textGrob(case_left, x= 0.5 - center_distance - w_left + case_distance,
                              y = height_first - distance_bar, just="left",
                              gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface))
     }
 
     if(case_right/n < 0.5){
-      value_right <- textGrob(case_right, x= 0.5 + center_distance + w_right + case_distance,
+      value_right <- grid::textGrob(case_right, x= 0.5 + center_distance + w_right + case_distance,
                              y = height_first - distance_bar, just="left",
                              gp = gpar(cex=case_size, col = col_right, fontface = outcome_cases_fontface))
     } else {
-      value_right <- textGrob(case_right, x= 0.5 + center_distance + w_right - case_distance,
+      value_right <- grid::textGrob(case_right, x= 0.5 + center_distance + w_right - case_distance,
                              y = height_first - distance_bar, just="right",
                              gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface))
     }
