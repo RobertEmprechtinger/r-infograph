@@ -16,37 +16,101 @@ infobar(
   cases_left,
   center_distance = 0.01,
   fontsize = 1,
-  description_size = 6,
-  bar_size = 6,
+  description_size = 4,
+  bar_size = 2.5,
   n_size = 3.5 * fontsize,
-  n_fontface = "bold",
+  headline_main_fontface = "bold",
   col_left = rgb(0.4, 0.4, 0.4),
   col_right = "#D17A00",
   headline1_fontface = "plain",
   headline2_fontface = "bold",
-  n_height = 0.7,
+  headline_main_height = 0.7,
   headline1_height = 0.37,
   headline2_height = 0.2,
   headline_1_text_right = headline_1_text_left,
   headline_size = 1.5 * fontsize,
   height_first = 0.8,
-  distance_box = 0.4,
-  box_height = 0.4,
-  case_distance = 0.01,
-  case_size = 1.8 * fontsize,
+  distance_bar = 0.4,
+  bar_height = 0.4,
+  case_distance = 1,
+  case_size = 1.8,
   outcome_col = rgb(0.3, 0.3, 0.3),
-  outcome_size = 1.5 * fontsize,
+  outcome_size = 1.5,
   outcome_fontface = "bold",
   outcome_cases_fontface = "bold",
   big.mark = ",",
-  small.mark = ".",
-  plot_width = 16
+  decimal.mark = ".",
+  plot_width = 22
 )
 }
 \arguments{
-\item{headline_main_text_right}{}
+\item{headline_main_text_left}{main headline text left}
+
+\item{headline_main_text_right}{main headline text right}
+
+\item{headline_1_text_left}{top subheadline text left}
+
+\item{headline_2_text_left}{bottom subheadline text left}
+
+\item{headline_2_text_right}{bottom subheadline text right}
 
 \item{n}{the length of the empty bars}
+
+\item{outcome_texts}{the headlines of the outcomes (describing the invidual bars)}
+
+\item{cases_right}{number of cases right}
+
+\item{cases_left}{number of cases left}
+
+\item{center_distance}{vertical white space size}
+
+\item{fontsize}{overall fontsize}
+
+\item{description_size}{space used for the main and subheadline}
+
+\item{bar_size}{height of bar size and associated outcome texts}
+
+\item{n_size}{overall sample size}
+
+\item{headline_main_fontface}{either "plain", "bold", "italic", or "bold.italic"}
+
+\item{col_left}{colour left column}
+
+\item{col_right}{colour right column}
+
+\item{headline2_fontface}{either "plain", "bold", "italic", or "bold.italic"}
+
+\item{headline_main_height}{main headline height}
+
+\item{headline1_height}{top subheadline space height}
+
+\item{headline2_height}{bottom subheadline space height}
+
+\item{headline_1_text_right}{top subheadline text right}
+
+\item{headline_size}{subheadline fontsize}
+
+\item{distance_bar}{distance outcome text to bars. Values between 0.4 to 0.6 looks best in most cases}
+
+\item{bar_height}{height of the bars}
+
+\item{case_distance}{distance "n cases" text to bar}
+
+\item{case_size}{size of "n cases" text}
+
+\item{outcome_col}{outcome text color}
+
+\item{outcome_size}{font size outcomes}
+
+\item{outcome_fontface}{either "plain", "bold", "italic", or "bold.italic"}
+
+\item{outcome_cases_fontface}{either "plain", "bold", "italic", or "bold.italic"}
+
+\item{big.mark}{symbol used for big marks (thousands)}
+
+\item{decimal.mark}{decimal symbol}
+
+\item{plot_width}{plot width}
 }
 \value{
 
