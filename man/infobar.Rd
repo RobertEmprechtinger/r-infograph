@@ -5,20 +5,22 @@
 \title{Title}
 \usage{
 infobar(
+  headline_main_text_left,
+  headline_main_text_right,
+  headline_1_text_left = "received",
+  headline_2_text_left = "",
+  headline_2_text_right = "",
   n,
+  outcome_texts,
   cases_right,
   cases_left,
-  outcome_texts,
-  headline_1_text_left,
-  headline_2_text_left,
-  headline_2_text_right,
   center_distance = 0.01,
   fontsize = 1,
-  description_size = 0.6,
-  bar_size = 0.4,
+  description_size = 6,
+  bar_size = 6,
   n_size = 3.5 * fontsize,
   n_fontface = "bold",
-  col_left = rgb(0.3, 0.3, 0.3),
+  col_left = rgb(0.4, 0.4, 0.4),
   col_right = "#D17A00",
   headline1_fontface = "plain",
   headline2_fontface = "bold",
@@ -27,7 +29,7 @@ infobar(
   headline2_height = 0.2,
   headline_1_text_right = headline_1_text_left,
   headline_size = 1.5 * fontsize,
-  height_first = 0.9,
+  height_first = 0.8,
   distance_box = 0.4,
   box_height = 0.4,
   case_distance = 0.01,
@@ -35,11 +37,16 @@ infobar(
   outcome_col = rgb(0.3, 0.3, 0.3),
   outcome_size = 1.5 * fontsize,
   outcome_fontface = "bold",
-  outcome_cases_fontface = "bold"
+  outcome_cases_fontface = "bold",
+  big.mark = ",",
+  small.mark = ".",
+  plot_width = 16
 )
 }
 \arguments{
-\item{outcome_cases_fontface}{}
+\item{headline_main_text_right}{}
+
+\item{n}{the length of the empty bars}
 }
 \value{
 
