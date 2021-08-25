@@ -43,6 +43,7 @@
 #' @examples
 infobar <- function(headline_main_text_left, headline_main_text_right,
                     headline_1_text_left = "received",
+                    headline_1_text_right = "received",
                     headline_2_text_left ="", headline_2_text_right ="",
                     n, outcome_texts, cases_right, cases_left,
   #general settings
@@ -64,7 +65,6 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
   headline_main_height = 0.7,
   headline1_height = 0.37,
   headline2_height = 0.2,
-  headline_1_text_right = headline_1_text_left,
 
   headline_size = 1.5 * fontsize,
 

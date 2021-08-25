@@ -8,6 +8,7 @@ infobar(
   headline_main_text_left,
   headline_main_text_right,
   headline_1_text_left = "received",
+  headline_1_text_right = "received",
   headline_2_text_left = "",
   headline_2_text_right = "",
   n,
@@ -27,7 +28,6 @@ infobar(
   headline_main_height = 0.7,
   headline1_height = 0.37,
   headline2_height = 0.2,
-  headline_1_text_right = headline_1_text_left,
   headline_size = 1.5 * fontsize,
   height_first = 0.8,
   distance_bar = 0.4,
@@ -49,6 +49,8 @@ infobar(
 \item{headline_main_text_right}{main headline text right}
 
 \item{headline_1_text_left}{top subheadline text left}
+
+\item{headline_1_text_right}{top subheadline text right}
 
 \item{headline_2_text_left}{bottom subheadline text left}
 
@@ -85,8 +87,6 @@ infobar(
 \item{headline1_height}{top subheadline space height}
 
 \item{headline2_height}{bottom subheadline space height}
-
-\item{headline_1_text_right}{top subheadline text right}
 
 \item{headline_size}{subheadline fontsize}
 
