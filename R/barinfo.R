@@ -16,7 +16,7 @@
 #' @param fontsize overall fontsize
 #' @param description_size space used for the main and subheadline
 #' @param bar_size height of bar size and associated outcome texts
-#' @param n_size overall sample size
+#' @param headline_main_size overall sample size
 #' @param headline_main_fontface either "plain", "bold", "italic", or "bold.italic"
 #' @param col_left colour left column
 #' @param col_right colour right column
@@ -53,7 +53,7 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
   bar_size = 2.5,
 
   # Text sample size
-  n_size = 3.5 * fontsize,
+  headline_main_size = 3,
   headline_main_fontface = "bold",
   col_left = rgb(0.4, 0.4, 0.4),
   col_right = "#D17A00",
@@ -66,7 +66,7 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
   headline1_height = 0.37,
   headline2_height = 0.2,
 
-  headline_size = 1.5 * fontsize,
+  headline_size = 1.5,
 
   ########box_settings#######
   #height of the first box element
@@ -95,18 +95,19 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
   case_distance <- case_distance / 100
   case_size = case_size * fontsize
   outcome_size = outcome_size * fontsize
+  headline_main_size = headline_main_size * fontsize
+  headline_size = headline_size * fontsize
+
+
 
 
   #creating the grobs
 
-  headline_2_text_right <- paste(formatC(n, format="f", big.mark = big.mark, decimal.mark = decimal.mark, digits=0), headline_2_text_right)
-  headline_2_text_left <- paste(formatC(n, format="f", big.mark = big.mark, decimal.mark = decimal.mark, digits=0), headline_2_text_left)
-
 
   # the text
-  n_left <- grid::textGrob(headline_main_text_left, x = 0.5 - center_distance, y = headline_main_height, just="right", gp = gpar(cex=n_size, col = col_left,
+  n_left <- grid::textGrob(headline_main_text_left, x = 0.5 - center_distance, y = headline_main_height, just="right", gp = gpar(cex=headline_main_size, col = col_left,
                                                                     fontface = headline_main_fontface))
-  n_right <- grid::textGrob(headline_main_text_right, 0.5 + center_distance, y = headline_main_height, just="left", gp = gpar(cex=n_size, col = col_right,
+  n_right <- grid::textGrob(headline_main_text_right, 0.5 + center_distance, y = headline_main_height, just="left", gp = gpar(cex=headline_main_size, col = col_right,
                                                                  fontface =headline_main_fontface))
   headline1_left <- grid::textGrob(headline_1_text_left, 0.5 - center_distance, y = headline1_height, just="right",
                         gp = gpar(cex=headline_size, col = col_left, fontface = headline1_fontface))
