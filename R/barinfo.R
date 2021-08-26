@@ -100,7 +100,6 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
 
 
 
-
   #creating the grobs
 
 
