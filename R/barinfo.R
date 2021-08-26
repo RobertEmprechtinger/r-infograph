@@ -158,24 +158,27 @@ infobar <- function(headline_main_text_left, headline_main_text_right,
                           gp = gpar(col=col_right, fill = col_right))
 
     #bar text
+    case_left_print <- formatC(case_left, big.mark = big.mark, decimal.mark = decimal.mark)
+    case_right_print <- formatC(case_right, big.mark = big.mark, decimal.mark = decimal.mark)
+
     ifelse(case_left/n < 0.5,
       #condition true
-      value_left <- grid::textGrob(case_left, x= 0.5 - center_distance - w_left - case_distance,
+      value_left <- grid::textGrob(case_left_print, x= 0.5 - center_distance - w_left - case_distance,
                              y = height_first - distance_bar, just="right",
                              gp = gpar(cex=case_size, col = col_left, fontface = outcome_cases_fontface)),
       #condition false
-      value_left <- grid::textGrob(case_left, x= 0.5 - center_distance - w_left + case_distance,
+      value_left <- grid::textGrob(case_left_print, x= 0.5 - center_distance - w_left + case_distance,
                              y = height_first - distance_bar, just="left",
                              gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface)))
 
 
     ifelse(case_right/n < 0.5,
       #condition true
-      value_right <- grid::textGrob(case_right, x= 0.5 + center_distance + w_right + case_distance,
+      value_right <- grid::textGrob(case_right_print, x= 0.5 + center_distance + w_right + case_distance,
                              y = height_first - distance_bar, just="left",
                              gp = gpar(cex=case_size, col = col_right, fontface = outcome_cases_fontface)),
       #condition false
-      value_right <- grid::textGrob(case_right, x= 0.5 + center_distance + w_right - case_distance,
+      value_right <- grid::textGrob(case_right_print, x= 0.5 + center_distance + w_right - case_distance,
                              y = height_first - distance_bar, just="right",
                              gp = gpar(cex=case_size, col = "white", fontface = outcome_cases_fontface)))
 
