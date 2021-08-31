@@ -19,7 +19,7 @@ infobar(
   fontsize = 1,
   description_size = 4,
   bar_size = 2.5,
-  n_size = 3.5 * fontsize,
+  headline_main_size = 3,
   headline_main_fontface = "bold",
   col_left = rgb(0.4, 0.4, 0.4),
   col_right = "#D17A00",
@@ -28,7 +28,7 @@ infobar(
   headline_main_height = 0.7,
   headline1_height = 0.37,
   headline2_height = 0.2,
-  headline_size = 1.5 * fontsize,
+  headline_size = 1.5,
   height_first = 0.8,
   distance_bar = 0.4,
   bar_height = 0.4,
@@ -72,7 +72,7 @@ infobar(
 
 \item{bar_size}{height of bar size and associated outcome texts}
 
-\item{n_size}{overall sample size}
+\item{headline_main_size}{overall sample size}
 
 \item{headline_main_fontface}{either "plain", "bold", "italic", or "bold.italic"}
 
